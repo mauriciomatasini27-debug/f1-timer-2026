@@ -1,0 +1,160 @@
+/* Variables de color de la F1 */
+:root {
+    --color-rojo-f1: #e10600;
+    --color-negro-fondo: #121212;
+    --color-gris-claro: #f0f0f0;
+    --color-gris-oscuro: #1d1d25;
+}
+
+/* Estilos Globales */
+body {
+    font-family: 'Arial Black', sans-serif;
+    background-color: var(--color-negro-fondo);
+    color: var(--color-gris-claro);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start; /* Alinea arriba para evitar mucho espacio */
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+/* 🏆 ESTRUCTURA PRINCIPAL DE CUADRÍCULA (4 Filas) 🏆 */
+.grid-principal {
+    display: grid;
+    /* Define las 4 filas: F1, CALENDARIO, CARRERA ACTUAL, BOTONES */
+    grid-template-rows: auto auto 1fr auto; 
+    width: 95%;
+    max-width: 1000px;
+    background-color: var(--color-gris-oscuro);
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.6);
+    padding: 20px;
+}
+
+/* --- FILA 1: TÍTULO F1 --- */
+.grid-header-f1 {
+    grid-row: 1;
+    text-align: center;
+    padding-top: 10px;
+}
+.titulo-f1 {
+    font-size: 5em;
+    color: var(--color-rojo-f1);
+    margin: 0;
+    line-height: 1;
+    letter-spacing: 5px;
+}
+
+/* --- FILA 2: SUBTÍTULO CALENDARIO 2026 --- */
+.grid-header-calendario {
+    grid-row: 2;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 3px solid var(--color-rojo-f1);
+    margin-bottom: 30px;
+}
+.subtitulo-calendario {
+    font-size: 1.5em;
+    color: var(--color-gris-claro);
+    margin: 0;
+    letter-spacing: 2px;
+}
+
+/* --- FILA 3: INFORMACIÓN DE CARRERA Y CONTADOR --- */
+.grid-carrera-actual {
+    grid-row: 3;
+    text-align: center;
+    padding: 20px 0 40px 0;
+}
+.carrera-info {
+    margin-bottom: 20px;
+}
+.bandera {
+    width: 70px;
+    height: 45px;
+
+    margin-bottom: 10px;
+}
+#nombre-carrera {
+    font-size: 2.5em;
+    color: white;
+    margin: 5px 0 0 0;
+}
+.circuito-nombre {
+    font-size: 1.2em;
+    color: #999;
+    margin: 0;
+}
+/* Contador (copiado de estilos anteriores, pero centrado en la cuadrícula) */
+#contador {
+    display: flex;
+    justify-content: center;
+    font-size: 2.5em;
+    margin-top: 20px;
+    font-weight: bold;
+}
+.unidad {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+}
+.unidad span {
+    font-size: 1.5em;
+    line-height: 1;
+    color: var(--color-rojo-f1);
+}
+.unidad p {
+    font-size: 0.35em;
+    font-weight: normal;
+    color: var(--color-gris-claro);
+    margin: 5px 0 0 0;
+}
+.separador {
+    margin: 0 15px;
+    color: var(--color-rojo-f1);
+    font-size: 1.2em;
+    line-height: 1.5;
+}
+
+
+/* --- FILA 4: MENÚ DE BOTONES EN GRID (Tu 4x4) --- */
+.grid-botones-menu {
+    grid-row: 4;
+    padding: 20px;
+    border-top: 1px dashed var(--color-rojo-f1);
+}
+
+.menu-botones-grid {
+    display: grid;
+    /* 🚨 4x4 Grid para los botones 🚨 */
+    grid-template-columns: repeat(4, 1fr); 
+    gap: 10px; /* Espacio entre los botones */
+    margin: 0 auto;
+    max-width: 800px; /* Limita el ancho para que no se estiren demasiado */
+}
+
+.menu-botones-grid button {
+    background-color: var(--color-gris-oscuro);
+    color: var(--color-gris-claro);
+    border: 1px solid #555;
+    padding: 10px 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.2s, border-color 0.2s;
+    font-size: 0.9em;
+    text-align: center;
+    /* Estilo para que se vea bien el nombre del circuito como botón */
+    white-space: nowrap; 
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.menu-botones-grid button:hover {
+    background-color: var(--color-rojo-f1);
+    border-color: var(--color-rojo-f1);
+    color: black;
+    font-weight: bold;
+}
+    

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>F1 Timer 2026</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="grid-principal">
+        
+        <header class="grid-header-f1">
+            <h1 class="titulo-f1">F1</h1>
+        </header>
+
+        <div class="grid-header-calendario">
+            <h2 class="subtitulo-calendario">CALENDARIO 2026</h2>
+        </div>
+        
+        <div class="grid-carrera-actual">
+            
+            <div class="carrera-info">
+                <img id="bandera-pais" src="" alt="Bandera" class="bandera">
+                <h3 id="nombre-carrera">Cargando Próxima Carrera...</h3>
+                <p id="nombre-circuito" class="circuito-nombre"></p>
+            </div>
+
+            <div class="contador-caja" id="contador">
+                <div class="unidad"><span id="dias">00</span><p>DÍAS</p></div>
+                <span class="separador">:</span>
+                <div class="unidad"><span id="horas">00</span><p>HRS</p></div>
+                <span class="separador">:</span>
+                <div class="unidad"><span id="minutos">00</span><p>MIN</p></div>
+                <span class="separador">:</span>
+                <div class="unidad"><span id="segundos">00</span><p>SEG</p></div>
+            </div>
+            <div class="fecha-carrera-contenedor">
+        <p class="fecha-etiqueta">FECHA Y HORA DE LA CARRERA</p>
+        <span id="fecha-carrera-display" class="fecha-valor"></span>
+    </div>
+        </div>
+
+        <div class="grid-botones-menu">
+            <div id="menu-carreras" class="menu-botones-grid">
+                </div>
+        </div>
+
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
