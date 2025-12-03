@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Política de Privacidad - F1 Timer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0D0D0D; 
+            color: #AAAAAA; 
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #00FFFF; /* Cian Telemetría */
+            border-bottom: 2px solid #E10600; /* Línea de contraste */
+            padding-bottom: 10px;
+            font-size: 2.5em;
+        }
+        h2 {
+            color: white;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        a {
+            color: #00FFFF;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Política de Privacidad</h1>
+    <p>Fecha de última actualización: 3 de Diciembre de 2025</p>
+
+    <p>Este documento describe cómo [Nombre de su empresa/sitio] gestiona y protege la información que usted proporciona al usar nuestro servicio de cronómetro de carreras (el "Servicio").</p>
+
+    <h2>1. Recopilación y Uso de Datos</h2>
+    <p>El Servicio no requiere registro ni recopila datos personales como nombre, correo electrónico o dirección. Los únicos datos recopilados son de uso anónimo a través de servicios de terceros para mejorar el rendimiento del sitio y la experiencia del usuario.</p>
+
+    <h2>2. Cookies y Tecnologías de Terceros</h2>
+
+    <h3>Google AdSense</h3>
+    <p>Utilizamos Google AdSense para la monetización del Servicio. Google utiliza cookies para mostrar anuncios relevantes basados en sus visitas previas a este y otros sitios en Internet (mecanismo conocido como DoubleClick DART cookie).</p>
+    <p>Al utilizar este Servicio, usted consiente el uso de cookies por parte de Google para la personalización de anuncios.</p>
+    
+    <h3>Datos de Uso</h3>
+    <p>Recopilamos información sobre cómo se accede y se utiliza el Servicio (ej. qué circuito se selecciona). Estos Datos de Uso pueden incluir información como la dirección de Protocolo de Internet de su dispositivo (ej. dirección IP), tipo de navegador y páginas visitadas. Esta información es anónima y se utiliza para el análisis del rendimiento del servidor y la optimización de la interfaz.</p>
+
+    <h2>3. Seguridad de los Datos</h2>
+    <p>La seguridad de su información es importante para nosotros, pero recuerde que ningún método de transmisión por Internet o método de almacenamiento electrónico es 100% seguro. Dado que no recopilamos datos personales sensibles, el riesgo es mínimo.</p>
+
+    <h2>4. Cambios en la Política de Privacidad</h2>
+    <p>Podemos actualizar nuestra Política de Privacidad periódicamente. Le notificaremos cualquier cambio publicando la nueva Política de Privacidad en esta página.</p>
+
+    <p>Para preguntas sobre esta Política, contáctenos a través de [Su correo electrónico de contacto].</p>
+    <p><a href="index.html">Volver al Timer</a></p>
+
+</body>
+</html>
