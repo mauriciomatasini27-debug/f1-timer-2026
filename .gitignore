@@ -1,4 +1,0 @@
-# Contenido de .gitignore
-.DS_Store
-*.log
-node_modules/
