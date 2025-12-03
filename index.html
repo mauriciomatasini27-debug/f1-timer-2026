@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MotorSport Timer - Alto Rendimiento</title>
+    <!-- Fuente Genérica, Moderna y Limpia (Inter) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ------------------------------------------------------------------- */
+        /* CSS DEL TIMER: ESTÉTICA DE ALTO RENDIMIENTO Y TELEMETRÍA */
+        /* ------------------------------------------------------------------- */
+
+        /* Variables de color (ROJO F1 se mantiene para botones, pero el título usa CIAN) */
+        :root {
+            --color-rojo-f1: #e10600; /* Rojo de Alerta/Contraste */
+            --color-cian-telemetria: #00FFFF; /* Cian Eléctrico para datos y títulos principales */
+            --color-negro-fondo: #0D0D0D; /* Fibra de Carbono Mate */
+            --color-gris-claro: #AAAAAA; /* Gris para textos secundarios */
+            --color-gris-oscuro: #1d1d25; /* Contenedores interiores */
+            --color-verde-luz: #00FF00; /* Luz de Estado: Próximo */
+            --color-rojo-luz: #FF0000; /* Luz de Estado: Finalizado */
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* ESTILOS GLOBALES Y FIBRA DE CARBONO */
+        /* ------------------------------------------------------------------- */
+
+        body {
+            background-color: var(--color-negro-fondo); 
+            color: #FFFFFF;
+            margin: 0;
+            padding: 20px; 
+            font-family: 'Inter', sans-serif; /* Fuente genérica y limpia (Marca Neutral) */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            /* Patrón de Fibra de Carbono (Ilusión) */
+            background-image:
+                linear-gradient(45deg, rgba(0, 0, 0, 0.2) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.2) 100%),
+                linear-gradient(-45deg, rgba(0, 0, 0, 0.2) 25%, transparent 25%, transparent 75%, rgba(0, 0, 0, 0.2) 75%, rgba(0, 0, 0, 0.2) 100%);
+            background-size: 20px 20px;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* ESTRUCTURA PRINCIPAL Y CONTENEDORES */
+        /* ------------------------------------------------------------------- */
+        .grid-principal {
+            display: grid;
+            grid-template-rows: auto auto 1fr auto; 
+            width: 95%;
+            max-width: 900px;
+            
+            background-color: rgba(0, 0, 0, 0.75); 
+            
+            border-radius: 0; 
+            
+            border: 1px solid rgba(255, 255, 255, 0.05); 
+            box-shadow: 0 0 40px rgba(0, 0, 0, 0.8), inset 0 0 20px rgba(0, 0, 0, 0.5); 
+            padding: 20px;
+        }
+
+        /* --- TÍTULO PRINCIPAL (F1, ahora rojo) --- */
+        .titulo-f1 {
+            font-size: 5em;
+            /* CAMBIO: Usar Rojo F1 para el título principal, como se solicitó */
+            color: var(--color-rojo-f1); 
+            margin: 0;
+            line-height: 1;
+            letter-spacing: 10px; 
+            font-weight: 700;
+        }
+
+        /* --- SUBTÍTULO CALENDARIO 2026 --- */
+        .grid-header-calendario {
+            grid-row: 2;
+            text-align: center;
+            padding-bottom: 15px;
+            /* La línea roja de contraste se mantiene como elemento de rendimiento */
+            border-bottom: 4px solid var(--color-rojo-f1); 
+            margin-bottom: 20px;
+        }
+        .subtitulo-calendario {
+            font-size: 1.2em;
+            color: var(--color-gris-claro);
+            letter-spacing: 3px;
+            font-weight: 400;
+            text-transform: uppercase;
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* CONTADOR Y TELEMETRÍA (Cian Eléctrico y Brillo) */
+        /* ------------------------------------------------------------------- */
+        .grid-carrera-actual {
+            text-align: center;
+            padding: 20px 0 40px 0;
+        }
+        #nombre-carrera {
+            font-size: 2.5em; 
+            color: white;
+            margin: 5px 0 0 0;
+            font-weight: 600;
+        }
+        .circuito-nombre {
+            font-size: 1.1em;
+            color: var(--color-gris-claro);
+            font-weight: 400;
+        }
+        .bandera {
+            width: 70px;
+            height: 45px;
+            object-fit: cover;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            margin-bottom: 10px;
+        }
+
+        /* Contenedor del Timer */
+        .timer-display {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end; 
+            margin-top: 30px;
+            font-family: 'Inter', sans-serif; /* Usamos Inter para los números */
+        }
+
+        /* Estilo para los números (Cian Eléctrico) */
+        .timer-value { 
+            font-size: 6rem; 
+            font-weight: 700;
+            color: var(--color-cian-telemetria); 
+            text-shadow: 0 0 15px rgba(0, 255, 255, 0.8), 0 0 5px rgba(0, 255, 255, 0.5); 
+            line-height: 1;
+            letter-spacing: 2px;
+        }
+
+        /* Estilo para los separadores (:) */
+        .separador {
+            margin: 0 10px;
+            color: var(--color-cian-telemetria);
+            font-size: 3rem;
+            line-height: 1;
+            font-weight: 400;
+            padding-bottom: 10px; 
+        }
+
+        /* Contenedor de unidad y etiqueta */
+        .unidad {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 100px;
+        }
+        .unidad p {
+            color: var(--color-gris-claro);
+            font-size: 0.9em;
+            font-weight: 600;
+            margin: 5px 0 0 0;
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+        }
+        .fecha-etiqueta {
+            color: var(--color-gris-claro);
+            font-size: 0.9em;
+            margin: 20px 0 5px 0;
+        }
+        .fecha-valor {
+            color: white;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+
+        /* ------------------------------------------------------------------- */
+        /* BOTONES DE CIRCUITO Y LUCES DE ESTADO (Aerodinámica) */
+        /* ------------------------------------------------------------------- */
+        .grid-botones-menu {
+            padding: 20px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05); 
+        }
+
+        .menu-botones-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr); 
+            gap: 8px; 
+            margin: 0 auto;
+            max-width: 800px;
+        }
+
+        /* Estilo Base del Botón/Enlace de Circuito */
+        .circuit-link {
+            background-color: transparent;
+            color: white;
+            padding: 8px 10px;
+            cursor: pointer;
+            font-size: 0.9em;
+            text-align: left; 
+            text-decoration: none;
+            position: relative; 
+            transition: background-color 0.2s, color 0.2s;
+            font-weight: 600;
+            overflow: hidden;
+
+            /* Geometría Aerodinámica: Bordes rectos */
+            border: 1px solid;
+            border-radius: 0; 
+        }
+
+        /* Contornos Bicolores (Uso de Rojo y Cian como contraste genérico) */
+        .menu-botones-grid .circuit-link:nth-child(odd) {
+            border-color: var(--color-cian-telemetria);
+        }
+        .menu-botones-grid .circuit-link:nth-child(even) {
+            border-color: var(--color-rojo-f1);
+        }
+
+        /* Efecto Hover */
+        .circuit-link:hover {
+            color: var(--color-negro-fondo);
+        }
+        .menu-botones-grid .circuit-link:nth-child(even):hover {
+            background-color: var(--color-rojo-f1);
+            border-color: var(--color-rojo-f1);
+        }
+        .menu-botones-grid .circuit-link:nth-child(odd):hover {
+            background-color: var(--color-cian-telemetria);
+            border-color: var(--color-cian-telemetria);
+        }
+
+        /* ------------------------------------------------------------------- */
+        /* LUZ DE ESTADO DINÁMICA (Verde / Rojo) */
+        /* ------------------------------------------------------------------- */
+
+        .status-light {
+            position: absolute;
+            top: 50%;
+            right: 8px; 
+            transform: translateY(-50%);
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            transition: all 0.3s;
+        }
+
+        /* ESTADO 1: PRÓXIMO / PENDIENTE (VERDE) */
+        .circuit-status-upcoming .status-light {
+            background-color: var(--color-verde-luz);
+            box-shadow: 0 0 7px 2px rgba(0, 255, 0, 0.7); 
+        }
+
+        /* ESTADO 2: FINALIZADO / COMPLETADO (ROJO) */
+        .circuit-status-completed .status-light {
+            background-color: var(--color-rojo-luz);
+            box-shadow: 0 0 7px 2px rgba(255, 0, 0, 0.7); 
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .menu-botones-grid {
+                grid-template-columns: repeat(2, 1fr); 
+            }
+            .titulo-f1 {
+                font-size: 3em;
+                letter-spacing: 5px;
+            }
+            .timer-value {
+                font-size: 4rem;
+            }
+            .separador {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="grid-principal">
+        
+        <header class="grid-header-f1">
+            <!-- CAMBIO: Título a 'F1' y ya usa el color rojo del CSS -->
+            <h1 class="titulo-f1">F1</h1>
+        </header>
+
+        <div class="grid-header-calendario">
+            <h2 class="subtitulo-calendario">CALENDARIO 2026</h2>
+        </div>
+        
+        <div class="grid-carrera-actual">
+            
+            <div class="carrera-info">
+                <!-- Se cargará la imagen de la bandera desde JS -->
+                <img id="bandera-pais" src="" alt="Bandera del País" class="bandera">
+                <h3 id="nombre-carrera">Cargando Próxima Carrera...</h3>
+                <p id="nombre-circuito" class="circuito-nombre"></p>
+            </div>
+
+            <!-- Estructura del contador (Timer Display) -->
+            <div class="contador-caja timer-display" id="contador">
+                <div class="unidad"><span id="dias" class="timer-value">00</span><p>DÍAS</p></div>
+                <span class="separador">:</span>
+                <div class="unidad"><span id="horas" class="timer-value">00</span><p>HRS</p></div>
+                <span class="separador">:</span>
+                <div class="unidad"><span id="minutos" class="timer-value">00</span><p>MIN</p></div>
+                <span class="separador">:</span>
+                <div class="unidad"><span id="segundos" class="timer-value">00</span><p>SEG</p></div>
+            </div>
+
+            <div class="fecha-carrera-contenedor">
+                <p class="fecha-etiqueta">FECHA Y HORA DE LA CARRERA</p>
+                <span id="fecha-carrera-display" class="fecha-valor"></span>
+            </div>
+        </div>
+
+        <div class="grid-botones-menu">
+            <!-- Los botones se generarán aquí con JavaScript -->
+            <div id="menu-carreras" class="menu-botones-grid">
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // -------------------------------------------------------------------
+        // RACE TRACKER - LÓGICA PRINCIPAL Y ESTADO DINÁMICO (JavaScript)
+        // -------------------------------------------------------------------
+
+        let carreraActual;
+        const temporada2026 = [
+            // NOTA: Los paths de imagen deben existir en el entorno del usuario
+            { id: 1, nombre: "Gran Premio de Australia", circuito: "Albert Park Circuit", fecha: "2026-03-08T04:00:00Z", imagen: "assets/flags/Australia.svg.png" },
+            { id: 2, nombre: "Gran Premio de China", circuito: "Shanghai International Circuit", fecha: "2026-03-15T07:00:00Z", imagen: "assets/flags/China.svg.png" },
+            { id: 3, nombre: "Gran Premio de Japón", circuito: "Suzuka International Racing Course", fecha: "2026-03-29T05:00:00Z", imagen: "assets/flags/Japon.svg.png" },
+            { id: 4, nombre: "Gran Premio de Baréin", circuito: "Bahrain International Circuit", fecha: "2026-04-12T14:00:00Z", imagen: "assets/flags/Bahrain.svg.png" },
+            { id: 5, nombre: "Gran Premio de Arabia Saudita", circuito: "Jeddah Corniche Circuit", fecha: "2026-04-19T17:00:00Z", imagen: "assets/flags/ArabiaSaudita.svg.png" },
+            { id: 6, nombre: "Gran Premio de Miami", circuito: "Miami International Autodrome", fecha: "2026-05-03T19:30:00Z", imagen: "assets/flags/EstadosUnidos.svg.png" },
+            { id: 7, nombre: "Gran Premio de Canadá", circuito: "Circuit Gilles Villeneuve", fecha: "2026-05-24T18:00:00Z", imagen: "assets/flags/Canada.svg.png" },
+            { id: 8, nombre: "Gran Premio de Mónaco", circuito: "Circuit de Monaco", fecha: "2026-06-07T13:00:00Z", imagen: "assets/flags/Monaco.svg.png" },
+            { id: 9, nombre: "Gran Premio de España", circuito: "Circuit de Barcelona-Catalunya", fecha: "2026-06-14T13:00:00Z", imagen: "assets/flags/España.svg.png" },
+            { id: 10, nombre: "Gran Premio de Austria", circuito: "Red Bull Ring", fecha: "2026-06-28T13:00:00Z", imagen: "assets/flags/Austria.svg.png" },
+            { id: 11, nombre: "Gran Premio de Gran Bretaña", circuito: "Silverstone Circuit", fecha: "2026-07-05T14:00:00Z", imagen: "assets/flags/GranBretaña.svg.png" },
+            { id: 12, nombre: "Gran Premio de Bélgica", circuito: "Circuit de Spa-Francorchamps", fecha: "2026-07-19T13:00:00Z", imagen: "assets/flags/Belgica.svg.png" },
+            { id: 13, nombre: "Gran Premio de Hungría", circuito: "Hungaroring", fecha: "2026-07-26T13:00:00Z", imagen: "assets/flags/Hungria.svg.png" },
+            { id: 14, nombre: "Gran Premio de Países Bajos", circuito: "Circuit Zandvoort", fecha: "2026-08-23T13:00:00Z", imagen: "assets/flags/Netherlands.svg.png" },
+            { id: 15, nombre: "Gran Premio de Italia", circuito: "Autodromo Nazionale Monza", fecha: "2026-09-06T13:00:00Z", imagen: "assets/flags/Italia.svg.png" },
+            { id: 16, nombre: "Gran Premio de España (Madrid)", circuito: "Nuevo Circuito de Madrid", fecha: "2026-09-13T13:00:00Z", imagen: "assets/flags/España.svg.png" },
+            { id: 17, nombre: "Gran Premio de Azerbaiyán", circuito: "Baku City Circuit", fecha: "2026-09-26T11:00:00Z", imagen: "assets/flags/Azerbaijan.svg.png" },
+            { id: 18, nombre: "Gran Premio de Singapur", circuito: "Marina Bay Street Circuit", fecha: "2026-10-11T12:00:00Z", imagen: "assets/flags/Singapore.svg.png" },
+            { id: 19, nombre: "Gran Premio de Estados Unidos (Austin)", circuito: "Circuit of the Americas (COTA)", fecha: "2026-10-25T19:00:00Z", imagen: "assets/flags/EstadosUnidos.svg.png" },
+            { id: 20, nombre: "Gran Premio de Ciudad de México", circuito: "Autódromo Hermanos Rodríguez", fecha: "2026-11-01T19:00:00Z", imagen: "assets/flags/Mexico.svg.png" },
+            { id: 21, nombre: "Gran Premio de São Paulo (Brasil)", circuito: "Autódromo José Carlos Pace (Interlagos)", fecha: "2026-11-08T17:00:00Z", imagen: "assets/flags/Brasil.svg.png" },
+            { id: 22, nombre: "Gran Premio de Las Vegas", circuito: "Las Vegas Strip Circuit", fecha: "2026-11-22T06:00:00Z", imagen: "assets/flags/EstadosUnidos.svg.png" },
+            { id: 23, nombre: "Gran Premio de Qatar", circuito: "Lusail International Circuit", fecha: "2026-11-29T15:00:00Z", imagen: "assets/flags/Qatar.svg.png" },
+            { id: 24, nombre: "Gran Premio de Abu Dabi", circuito: "Yas Marina Circuit", fecha: "2026-12-06T13:00:00Z", imagen: "assets/flags/Abu_Dhabi.svg.png" },
+        ];
+
+        function calcularTiempoRestante(fechaFuturo) {
+            const ahora = new Date();
+            const destino = new Date(fechaFuturo);
+            return destino - ahora;
+        }
+
+        function convertirMilisegundos(milisegundos) {
+            const segundos = Math.floor(milisegundos / 1000);
+            const minutos = Math.floor(segundos / 60);
+            const horas = Math.floor(minutos / 60);
+            const dias = Math.floor(horas / 24);
+
+            const segundosRestantes = segundos % 60;
+            const minutosRestantes = minutos % 60;
+            const horasRestantes = horas % 24;
+
+            return { dias: dias, horas: horasRestantes, minutos: minutosRestantes, segundos: segundosRestantes };
+        }
+
+        function renderizarCuentaRegresiva(carrera) {
+            // 1. Elementos a actualizar
+            const nombreCarreraEl = document.getElementById("nombre-carrera");
+            const banderaEl = document.getElementById("bandera-pais");
+            const circuitoNombreEl = document.getElementById("nombre-circuito");
+            const fechaCarreraDisplayEl = document.getElementById("fecha-carrera-display");
+            
+            const diasEl = document.getElementById("dias");
+            const horasEl = document.getElementById("horas");
+            const minutosEl = document.getElementById("minutos");
+            const segundosEl = document.getElementById("segundos");
+
+            // Actualizamos la información base
+            nombreCarreraEl.innerText = carrera.nombre;
+            banderaEl.src = carrera.imagen;
+            circuitoNombreEl.innerText = carrera.circuito;
+
+            // Formateamos la fecha
+            const fechaUTC = new Date(carrera.fecha);
+            const opcionesFormato = { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit", timeZoneName: "short" };
+            fechaCarreraDisplayEl.innerText = fechaUTC.toLocaleTimeString(navigator.language, opcionesFormato);
+            
+            // 2. Calculamos tiempo restante
+            const tiempoFaltante = calcularTiempoRestante(carrera.fecha);
+
+            // 3. Lógica de Estado: Carrera Terminada o Próxima
+            if (tiempoFaltante < 0) {
+                // Carrera terminada
+                diasEl.innerText = "00";
+                horasEl.innerText = "00";
+                minutosEl.innerText = "00";
+                segundosEl.innerText = "00";
+
+                nombreCarreraEl.innerText = carrera.nombre + " (FINALIZADA)";
+                
+                // Forzamos el cambio de luz a ROJO en el menú
+                crearBotonesMenu();
+
+                return;
+            }
+
+            // 4. Si la carrera es futura, mostramos el contador
+            const tiempoFinal = convertirMilisegundos(tiempoFaltante);
+
+            // Inyectamos números formateados
+            diasEl.innerText = tiempoFinal.dias;
+            horasEl.innerText = tiempoFinal.horas.toString().padStart(2, "0");
+            minutosEl.innerText = tiempoFinal.minutos.toString().padStart(2, "0");
+            segundosEl.innerText = tiempoFinal.segundos.toString().padStart(2, "0");
+        }
+
+        // -------------------------------------------------------------------
+        // FUNCIÓN DE MENÚ: Crea los botones y asigna las luces (Verde/Rojo)
+        // -------------------------------------------------------------------
+        function crearBotonesMenu() {
+            const contenedor = document.getElementById("menu-carreras");
+            contenedor.innerHTML = ""; // Limpia el contenedor
+
+            temporada2026.forEach((carrera) => {
+                const link = document.createElement("a");
+                
+                link.classList.add('circuit-link');
+                link.href = '#';
+                
+                // B. LÓGICA DE LUCES (Verde/Rojo)
+                const carreraDate = new Date(carrera.fecha);
+                const isCompleted = new Date() > carreraDate;
+
+                // Asignamos la clase que activa la luz VERDE o ROJA en el CSS
+                link.classList.add(isCompleted ? 'circuit-status-completed' : 'circuit-status-upcoming');
+                
+                // Insertamos la luz y el texto (circuito)
+                link.innerHTML = `<span class="status-light"></span>${carrera.circuito}`;
+                
+                // C. Evento Click
+                link.addEventListener("click", function (e) {
+                    e.preventDefault();
+                    carreraActual = carrera;
+                    
+                    renderizarCuentaRegresiva(carreraActual); 
+                    localStorage.setItem("ultimaCarreraId", carrera.id);
+
+                    // Volvemos a renderizar el menú para que la luz de la carrera activa se vea resaltada
+                    // (Opcional, si se quisiera un estado 'live' en el CSS)
+                    // crearBotonesMenu(); 
+                });
+
+                contenedor.appendChild(link);
+            });
+        }
+
+
+        // -------------------------------------------------------------------
+        // INICIALIZACIÓN Y BUCLE PRINCIPAL
+        // -------------------------------------------------------------------
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // 1. Determinar carrera actual (Guardada o Próxima)
+            const idGuardado = localStorage.getItem("ultimaCarreraId");
+            let carreraEncontrada = idGuardado ? temporada2026.find((c) => c.id === parseInt(idGuardado)) : null;
+
+            if (carreraEncontrada) {
+                carreraActual = carreraEncontrada;
+            } else {
+                // Buscar la próxima carrera si no hay estado guardado
+                const now = new Date();
+                const proximaCarrera = temporada2026.find(c => new Date(c.fecha) > now);
+                
+                carreraActual = proximaCarrera || temporada2026[0]; 
+                localStorage.setItem("ultimaCarreraId", carreraActual.id);
+            }
+            
+            // 2. Ejecutar la creación del menú con la lógica de luces
+            crearBotonesMenu();
+
+            // 3. Establecer el intervalo de actualización
+            setInterval(() => {
+                renderizarCuentaRegresiva(carreraActual);
+            }, 1000); 
+            
+            // Forzar la primera renderización inmediata
+            renderizarCuentaRegresiva(carreraActual);
+        });
+    </script>
+</body>
+</html>
