@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+       <url>
+          <!-- CORRECCIÓN: La URL principal debe ser la raíz del dominio para los servidores web -->
+          <loc>https://f1-timer.com/</loc>
+          <lastmod>2025-12-03</lastmod>
+          <changefreq>daily</changefreq>
+          <priority>1.0</priority>
+       </url>
+       <!-- Se mantienen las URLs de páginas legales -->
+       <url>
+          <loc>https://f1-timer.com/politica_privacidad.html</loc>
+          <lastmod>2025-12-03</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.5</priority>
+       </url>
+       <url>
+          <loc>https://f1-timer.com/terminos_y_condiciones.html</loc>
+          <lastmod>2025-12-03</lastmod>
+          <changefreq>monthly</changefreq>
+          <priority>0.5</priority>
+       </url>
+    </urlset>
